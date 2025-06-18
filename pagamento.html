@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento - Carol & Anderson</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    ul#resumo {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .botao {
+      margin-top: 1rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #88ccca;
+      color: white;
+    }
+    .botao:hover {
+      background-color: #61bfb9;
+    }
+  </style>
+  <script>
+    let carrinho = [];
+
+    function carregarResumo() {
+      const salvo = localStorage.getItem("carrinho");
+      if (salvo) carrinho = JSON.parse(salvo);
+
+      const lista = document.getElementById("resumo");
+      const total = document.getElementById("total");
+      lista.innerHTML = '';
+      let soma = 0;
+
+      carrinho.forEach(item => {
+        const subtotal = item.valor * item.quantidade;
+        const li = document.createElement("li");
+        li.innerText = `${item.nome} — R$ ${item.valor.toFixed(2)} x ${item.quantidade} = R$ ${subtotal.toFixed(2)}`;
+        lista.appendChild(li);
+        soma += subtotal;
+      });
+
+      total.innerText = `Total: R$ ${soma.toFixed(2)}`;
+    }
+
+    function copiarPIX() {
+      const chave = "carolviana85@hotmail.com";
+      navigator.clipboard.writeText(chave).then(() => {
+        alert("Chave PIX copiada com sucesso!");
+      });
+    }
+  </script>
+</head>
+<body onload="carregarResumo()">
+  <div class="container">
+    <h1>Resumo do Pagamento</h1>
+    <ul id="resumo"></ul>
+    <p id="total"><strong>Total:</strong></p>
+    <a class="botao" href="https://forms.gle/8s1WEVJiEqSkKfpq6" target="_blank">
+      Confirmar Pagamento
+    </a>
+  <a href="presentes.html" class="back-top">← Voltar</a>
+</body>
+</html>

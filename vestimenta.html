@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Traje dos Convidados - Carol &amp; Anderson</title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+    .traje-section {
+      display: none;
+      margin-top: 1rem;
+    }
+    .traje-section img {
+      max-width: 250px;
+      margin: 1rem 0;
+    }
+  </style>
+<script>
+    function mostrarTraje(id) {
+      document.querySelectorAll('.traje-section').forEach(el => el.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+  </script>
+<style>
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  background-color: white;
+  border-bottom: 3px solid #fcd5ce;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.navbar a {
+  color: #7c7c7c;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #d6336c;
+}
+
+.navbar a.active::after,
+.navbar a:hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: #d6336c;
+  border-radius: 10px;
+}
+</style></head>
+<body>
+<header>
+<h1>Traje dos Convidados</h1>
+</header>
+<nav class="navbar">
+  <a href="index.html">Página Inicial</a>
+  <a href="presentes.html">Lista de Presentes</a>
+  <a href="localizacao.html">Localização</a>
+  <a href="vestimenta.html" class="active">Trajes</a>
+  <a href="convite.html">Convite da Festa</a> 
+  <a href="confirmacao.html">Confirmação</a>    
+</nav>
+<main>
+<p>Escolha uma das opções abaixo para ver os detalhes:</p>
+<button onclick="mostrarTraje('convidado-masculino')">👔 Traje Convidado Masculino</button>
+<button onclick="mostrarTraje('convidado-feminino')">👗 Traje Convidado Feminino</button>
+<button onclick="mostrarTraje('padrinho')">🤵 Traje Padrinho</button>
+<button onclick="mostrarTraje('madrinha')">👰‍♀️ Traje Madrinha</button>
+<section class="traje-section" id="convidado-masculino">
+  <h2>Traje Convidado Masculino</h2>
+  <img src="imagens/traje_convidado_masc.jpg" alt="Traje Convidado Masculino" />
+  <p>Terno escuro com camisa clara e sapato social. Gravata e terno opcional.</p>
+</section>
+
+<section class="traje-section" id="convidado-feminino">
+  <h2>Traje Convidado Feminino</h2>
+  <img src="imagens/traje_convidada_fem.jpg" alt="Traje Convidada Feminino" />
+  <p>Vestido midi ou longo em tons claros, elegante, evitando branco.</p>
+</section>
+
+<section class="traje-section" id="padrinho">
+  <h2>Traje Padrinho</h2>
+  <img src="imagens/traje_padrinho.jpg" alt="Traje Padrinho" />
+  <p>Terno azul marinho com gravata rosa e camisa branca.</p>
+</section>
+
+<section class="traje-section" id="madrinha">
+  <h2>Traje Madrinha</h2>
+  <img src="imagens/traje_madrinha.jpg" alt="Traje Madrinha" />
+  <p>Vestido longo em tom rosé ou marsala, conforme paleta informada.</p>
+</section>
+</main>
+</body>
+</html>

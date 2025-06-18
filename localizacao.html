@@ -1,0 +1,76 @@
+<!-- localizacao.html -->
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Localização - Carol &amp; Anderson</title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  background-color: white;
+  border-bottom: 3px solid #fcd5ce;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.navbar a {
+  color: #7c7c7c;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #d6336c;
+}
+
+.navbar a.active::after,
+.navbar a:hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: #d6336c;
+  border-radius: 10px;
+}
+</style></head>
+<body>
+<header>
+<h1>Localização</h1>
+</header>
+<nav class="navbar">
+  <a href="index.html">Página Inicial</a>
+  <a href="presentes.html">Lista de Presentes</a>
+  <a href="localizacao.html" class="active">Localização</a>
+  <a href="vestimenta.html">Trajes</a>
+  <a href="convite.html">Convite da Festa</a>
+  <a href="confirmacao.html">Confirmação</a>     
+</nav>
+<main>
+<p>Aqui você encontrará os endereços com links para o mapa.</p>
+<ul>
+<li>
+<strong>Cerimônia:</strong>
+<a href="https://www.google.com/maps?q=Paróquia+Nossa+Senhora+da+Piedade,+Joaquim+Távora" target="_blank">
+        Paróquia Nossa Senhora da Piedade
+      </a>
+</li>
+<li>
+<strong>Festa:</strong>
+<a href="https://www.google.com/maps?q=Mango+Casa+de+Eventos,+Guararapes" target="_blank">
+        Mango Casa de Eventos
+      </a>
+</li>
+</ul>
+</main>
+</body>
+</html>

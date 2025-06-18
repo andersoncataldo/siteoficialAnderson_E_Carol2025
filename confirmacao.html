@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confirmação de Presença - Carol & Anderson</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff8f0;
+      background-size: cover;
+      color: #333;
+      text-align: center;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background-color: white;
+      border-bottom: 3px solid #fcd5ce;
+      padding: 1rem;
+      font-weight: bold;
+    }
+
+    .navbar a {
+      color: #7c7c7c;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 5px;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover,
+    .navbar a.active {
+      color: #d6336c;
+    }
+
+    .navbar a.active::after,
+    .navbar a:hover::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 100%;
+      background: #d6336c;
+      border-radius: 10px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      color: #c9184a;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
+    .botao-confirmar {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      color: white;
+      background-color: #88ccca;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .botao-confirmar:hover {
+      background-color: #61bfb9;
+    }
+
+    footer {
+      background: #fcd5ce;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+<header>
+<h1>Confirmação de Presença</h1>
+</header>
+
+  <nav class="navbar">
+    <a href="index.html">Página Inicial</a>
+    <a href="presentes.html">Lista de Presentes</a>
+    <a href="localizacao.html">Localização</a>
+    <a href="vestimenta.html">Trajes</a>
+    <a href="convite.html">Convite da Festa</a>
+    <a href="confirmacao.html" class="active">Confirmação</a>
+  </nav>
+
+  <div class="container">
+    <h1>Você vai vir, né? 💌</h1>
+    <p>Confirme sua presença para que possamos preparar tudo com muito carinho.</p>
+
+    <!-- Substitua pelo seu link real de confirmação -->
+    <a class="botao-confirmar" href="https://forms.gle/JNZqAgtFmATTkV5i6" target="_blank">
+      Confirmar Presença
+    </a>
+
+    <p style="margin-top: 2rem;">Aguardamos você com alegria!<br><strong>Carol & Anderson ❤️</strong></p>
+  </div>
+
+</body>
+</html>

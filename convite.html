@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Convite Especial - Carol & Anderson</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff8f0;
+      background-size: cover;
+      color: #333;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background-color: white;
+      border-bottom: 3px solid #fcd5ce;
+      padding: 1rem;
+      font-weight: bold;
+    }
+
+    .navbar a {
+      color: #7c7c7c;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 5px;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover,
+    .navbar a.active {
+      color: #d6336c;
+    }
+
+    .navbar a.active::after,
+    .navbar a:hover::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 100%;
+      background: #d6336c;
+      border-radius: 10px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      color: #c9184a;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .convite-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-top: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background: #fcd5ce;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+<header>
+<h1>Nosso Convite Especial</h1>
+</header>
+
+  <nav class="navbar">
+    <a href="index.html">Página Inicial</a>
+    <a href="presentes.html">Lista de Presentes</a>
+    <a href="localizacao.html">Localização</a>
+    <a href="vestimenta.html">Trajes</a>
+    <a href="convite.html" class="active">Convite da Festa</a>
+    <a href="confirmacao.html">Confirmação</a> 
+  </nav>
+
+  <div class="container">
+    <p>É com muita alegria que convidamos você para celebrar esse momento conosco.</p>
+
+    <!-- Substitua o caminho abaixo pelo local real do arquivo .png ou .jpg -->
+    <img src="C:\Users\ander\OneDrive\Área de Trabalho\PYTHON\siteAC\imagens\convite.jpg" alt="Convite da festa" class="convite-img">
+
+    <p style="margin-top: 1rem;">Esperamos por você!<br><strong>Com amor, Carol & Anderson ❤️</strong></p>
+  </div>
+
+</body>
+</html>

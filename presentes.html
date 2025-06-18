@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lista de Presentes - Carol &amp; Anderson</title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+    .gift-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem auto;
+      max-width: 960px;
+    }
+    .gift-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 240px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .gift-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+    .gift-card button {
+      background-color: #88ccca;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .gift-card button:hover {
+      background-color: #61bfb9;
+    }
+    .carrinho {
+      background: #fcd5ce;
+      padding: 1rem;
+      text-align: center;
+      margin-top: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    ul#itens li {
+      animation: fadeInItem 0.4s ease-in-out;
+    }
+    @keyframes fadeInItem {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #51cf66;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      opacity: 0;
+      animation: showToast 3s ease forwards;
+      z-index: 9999;
+    }
+    @keyframes showToast {
+      0% { opacity: 0; transform: translateY(-10px); }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-10px); }
+    }
+  </style>
+<script>
+  let carrinho = [];
+
+  function carregarCarrinho() {
+    const salvo = localStorage.getItem("carrinho");
+    if (salvo) carrinho = JSON.parse(salvo);
+
+    const criterioSalvo = localStorage.getItem("ordenacao");
+    if (criterioSalvo && document.getElementById("ordenacao")) {
+      document.getElementById("ordenacao").value = criterioSalvo;
+    }
+
+    atualizarCarrinho();
+  }
+
+  function salvarCarrinho() {
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  }
+
+  function mostrarToast(mensagem) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerText = mensagem;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+
+  function adicionarAoCarrinho(nome, valor) {
+    const existente = carrinho.find(item => item.nome === nome);
+    if (existente) {
+      existente.quantidade += 1;
+    } else {
+      carrinho.push({ nome, valor, quantidade: 1 });
+    }
+    salvarCarrinho();
+    atualizarCarrinho();
+    mostrarToast(`"${nome}" adicionado ao carrinho!`);
+  }
+
+  function removerItem(index) {
+    const item = carrinho[index];
+    if (item.quantidade > 1) {
+      item.quantidade -= 1;
+    } else {
+      carrinho.splice(index, 1);
+    }
+    salvarCarrinho();
+    atualizarCarrinho();
+  }
+
+  function incrementarItem(index) {
+    carrinho[index].quantidade += 1;
+    salvarCarrinho();
+    atualizarCarrinho();
+  }
+
+  function limparCarrinho() {
+    if (confirm("Tem certeza que deseja limpar todo o carrinho?")) {
+      carrinho = [];
+      salvarCarrinho();
+      atualizarCarrinho();
+    }
+  }
+
+  function atualizarCarrinho() {
+    const lista = document.getElementById("itens");
+    const total = document.getElementById("total");
+    const criterio = document.getElementById("ordenacao")?.value || "nome";
+
+    localStorage.setItem("ordenacao", criterio);
+
+    lista.innerHTML = '';
+    let soma = 0;
+    let quantidadeTotal = 0;
+
+    if (carrinho.length === 0) {
+      lista.innerHTML = '<li>Carrinho vazio</li>';
+      total.innerText = '';
+      return;
+    }
+
+    const carrinhoOrdenado = carrinho.slice().sort((a, b) => {
+      if (criterio === "valor") return b.valor - a.valor;
+      if (criterio === "quantidade") return b.quantidade - a.quantidade;
+      return a.nome.localeCompare(b.nome);
+    });
+
+    carrinhoOrdenado.forEach((item, index) => {
+      const subtotal = item.valor * item.quantidade;
+      const li = document.createElement("li");
+      li.innerHTML = `
+        ${item.nome} — R$ ${item.valor.toFixed(2)} x ${item.quantidade} = R$ ${subtotal.toFixed(2)}
+        <button onclick="removerItem(${index})" style="margin-left:8px;background:#f94144;color:#fff;border:none;border-radius:4px;padding:2px 8px;">➖</button>
+        <button onclick="incrementarItem(${index})" style="margin-left:4px;background:#43aa8b;color:#fff;border:none;border-radius:4px;padding:2px 8px;">➕</button>
+      `;
+      lista.appendChild(li);
+      soma += subtotal;
+      quantidadeTotal += item.quantidade;
+    });
+
+    total.innerText = `Total: R$ ${soma.toFixed(2)} • Itens únicos: ${carrinho.length} • Quantidade total: ${quantidadeTotal}`;
+  }
+
+  function finalizarPresente() {
+  window.location.href = "pagamento.html";
+  }
+
+
+  window.onload = carregarCarrinho;
+</script>
+<style>
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  background-color: white;
+  border-bottom: 3px solid #fcd5ce;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.navbar a {
+  color: #7c7c7c;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #d6336c;
+}
+
+.navbar a.active::after,
+.navbar a:hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: #d6336c;
+  border-radius: 10px;
+}
+</style></head>
+<body>
+<header>
+<h1>Lista de Presentes</h1>
+</header>
+<nav class="navbar">
+  <a href="index.html">Página Inicial</a>
+  <a href="presentes.html" class="active">Lista de Presentes</a>
+  <a href="localizacao.html">Localização</a>
+  <a href="vestimenta.html">Trajes</a>
+  <a href="convite.html">Convite da Festa</a>
+  <a href="confirmacao.html">Confirmação</a>    
+</nav>
+<main>
+<p>Escolha quantos presentes quiser ❤️</p>
+<div class="gift-grid">
+  <div class="gift-card">
+    <img alt="" src="imagens/Cofrinho da Gigi.png"/>
+    <p>Cofrinho da Gigi 👶💰</p>
+    <strong>R$ 49,99</strong><br/>
+    <button onclick="adicionarAoCarrinho('Cofrinho da Gigi', 49.99)">Presentear</button>
+  </div>
+<div class="gift-card">
+    <img alt="" src="imagens/Jantar da lua de mel.png"/>
+    <p>Jantar da Lua de Mel 🍝</p>
+    <strong>R$ 199,99</strong><br/>
+    <button onclick="adicionarAoCarrinho('Jantar da Lua de Mel', 199.99)">Presentear</button>
+</div>
+<div class="gift-card">
+    <img alt="" src="imagens/Mesada pro Andinho que fez o site.png"/>
+    <p>Mesada pro Andinho que fez o site 👨‍💻</p>
+    <strong>R$ 99,99</strong><br/>
+    <button onclick="adicionarAoCarrinho('Mesada pro Andinho que fez o site', 99.99)">Presentear</button>
+</div>
+<div class="gift-card">
+    <img alt="" src="imagens/Preferência no buquê.png"/>
+    <p>Preferência no buquê 💐</p>
+    <strong>R$ 299,99</strong><br/>
+    <button onclick="adicionarAoCarrinho('Preferência no buquê', 299.99)">Presentear</button>
+</div>
+  <div class="gift-card">
+    <img alt="" src="imagens/Direito de opinar na festa.png"/>
+    <p>Direito de opinar na festa 😂</p>
+    <strong>R$ 499,99</strong><br/>
+    <button onclick="adicionarAoCarrinho('Direito de opinar na festa', 499.99)">Presentear</button>
+</div>
+  <div class="gift-card">
+    <img alt="" src="imagens/Férias do Anderson.png"/>
+    <p>Férias do Anderson ✈️</p>
+    <strong>R$ 999,99</strong><br/>
+    <button onclick="adicionarAoCarrinho('Férias do Anderson', 999.99)">Presentear</button>
+  </div>
+</div>
+<div class="carrinho">
+<h2>🎁 Seu Carrinho</h2>
+<label for="ordenacao"><strong>Ordenar por:</strong></label>
+<select id="ordenacao" onchange="atualizarCarrinho()" style="margin-bottom: 1rem;">
+<option value="nome">🔤 Nome (A–Z)</option>
+<option value="valor">💰 Valor (Maior → Menor)</option>
+<option value="quantidade">📦 Quantidade (Maior → Menor)</option>
+</select>
+<ul id="itens" style="list-style: none; padding: 0;"></ul>
+<p id="total"><strong>Total: R$ 0,00</strong></p>
+<button onclick="finalizarPresente()">📋 Finalizar compra</button>
+<button onclick="limparCarrinho()" style="margin-top:10px;background:#999;">🧹 Limpar Carrinho</button>
+</div>
+</main>
+</body>
+</html>
