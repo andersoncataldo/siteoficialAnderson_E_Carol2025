@@ -158,6 +158,29 @@ button:hover, .gift-card:hover {
   color: #c9184a;
 }
 
+/* Menu com rolagem horizontal */
+.scrollable-navbar {
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-wrapper {
+  display: inline-flex;
+  gap: 2rem;
+  padding: 1rem;
+  min-width: max-content;
+}
+
+.scrollable-navbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollable-navbar::-webkit-scrollbar-thumb {
+  background: #fcd5ce;
+  border-radius: 10px;
+}
+
 @keyframes fadeIn {
   to {
     opacity: 1;
